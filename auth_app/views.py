@@ -69,3 +69,26 @@ class UserProfileView(APIView):
     def get(self, request):
         serializer = UserProfileSerializer(request.user)
         return Response(serializer.data)
+
+
+class UserChangePasswordView(APIView):
+    permission_classes = [IsAuthenticated]
+
+    def post(self, request):
+        serializer = UserChangePasswordSerializer(data=request.data)
+        serializer.is_valid(raise_exception=True)
+
+        user = request.user
+        current_password = serializer.validated_data['password']
+        new_password = serializer.validated_data['new_password']
+
+        if not authenticate(username=user.username, password=current_password):
+            return Response({
+                'error': 'Current password is incorrect '
+            }, status=status.HTTP_400_BAD_REQUEST)
+        
+        user.set_password(new_password)
+        user.save()
+        return Response({
+            'msg': 'Password changed successfully'
+        }, status=status.HTTP_200_OK)
