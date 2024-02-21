@@ -1,11 +1,12 @@
 from django.contrib import admin
+from django.contrib.auth.admin import UserAdmin as BaseUserAdmin
 
 from .models import *
 
 
 
 @admin.register(User)
-class UserAdmin(admin.ModelAdmin):
+class UserAdmin(BaseUserAdmin):
     list_display = ['id', 'username', 'email', 'is_staff', 'is_active', 'is_superuser']
     list_filter = ['id' ,'username', 'is_staff', 'is_active']
     fieldsets = (
