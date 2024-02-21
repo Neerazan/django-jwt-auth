@@ -64,7 +64,7 @@ class LoginUserView(APIView):
                 }, status=status.HTTP_404_NOT_FOUND)
 
 
-class UserProfileView(generics.RetrieveAPIView):
+class UserProfileView(APIView):
     permission_classes = [IsAuthenticated]
     def get(self, request):
         serializer = UserProfileSerializer(request.user)
