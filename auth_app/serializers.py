@@ -15,3 +15,9 @@ class UserLoginSerializer(serializers.Serializer):
     # print(f"This is serirlizers {password}, {username}")
     username = serializers.CharField()
     password = serializers.CharField()
+
+
+class UserProfileSerializer(serializers.Serializer):
+    username = serializers.CharField()
+    email = serializers.EmailField()
+    id = serializers.IntegerField()
