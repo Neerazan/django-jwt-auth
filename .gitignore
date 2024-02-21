@@ -1,5 +1,3 @@
 *.pyc
-/media/
-/static/
 *.log
 *.sqlite3
